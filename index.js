@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -8,6 +9,14 @@ const app = express();
 const api = require("./routes");
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: [process.env.ADMIN_APP_URL],
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 
 app.use("/api", api);
 
